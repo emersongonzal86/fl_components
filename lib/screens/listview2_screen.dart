@@ -13,7 +13,11 @@ class Listview2Screen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text('Listview Tipo 2')),
+        appBar: AppBar(
+            title: const Text('Listview Tipo 2'),
+            elevation: 0,
+            backgroundColor: Colors.indigo),
+
         //con el ListView.separated se hace carga perezosa de lso elementos de la lista no carga todos sino a medida que los va
         //necesitando
         body: ListView.separated(
@@ -21,7 +25,11 @@ class Listview2Screen extends StatelessWidget {
           // la i representan index
           itemBuilder: (context, i) => ListTile(
             title: Text(options[i]),
-            trailing: const Icon(Icons.arrow_forward_ios_outlined),
+            trailing: const Icon(Icons.arrow_forward_ios_outlined, color: Colors.indigo,),
+            onTap: () {
+              final game = options[i];
+              print(game);
+            },
           ),
           // se usa guin bajo cuando no se va a utilizar el argumento de la funcion y el numero de guines sera igual
           //a la posición del argumento _ uno y dos para la posicipn dos __ los guines bajos son nombres validos de argumentos
