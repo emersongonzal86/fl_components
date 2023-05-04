@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Material App',
         initialRoute: AppRoutes.initialRoute,
-        routes: AppRoutes.routes,
+        routes: AppRoutes.getAppRoutes(),
         // rutas creadas de manera dinamica
         onGenerateRoute: AppRoutes.onGenerateRoute);
   }
