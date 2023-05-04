@@ -13,10 +13,7 @@ class Listview2Screen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-            title: const Text('Listview Tipo 2'),
-            elevation: 0,
-            backgroundColor: Colors.indigo),
+        appBar: AppBar(title: const Text('Listview Tipo 2')),
 
         //con el ListView.separated se hace carga perezosa de lso elementos de la lista no carga todos sino a medida que los va
         //necesitando
@@ -25,7 +22,10 @@ class Listview2Screen extends StatelessWidget {
           // la i representan index
           itemBuilder: (context, i) => ListTile(
             title: Text(options[i]),
-            trailing: const Icon(Icons.arrow_forward_ios_outlined, color: Colors.indigo,),
+            trailing: const Icon(
+              Icons.arrow_forward_ios_outlined,
+              color: Colors.indigo,
+            ),
             onTap: () {
               final game = options[i];
               print(game);
