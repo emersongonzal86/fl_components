@@ -12,7 +12,7 @@ class AppTheme {
 
     //TextButton Theme
     textButtonTheme:
-        TextButtonThemeData(style: TextButton.styleFrom(primary: primary)),
+        TextButtonThemeData(style: TextButton.styleFrom(foregroundColor: primary)),
   );
 
   //Tema oscuro
