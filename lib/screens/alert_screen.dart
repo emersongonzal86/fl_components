@@ -6,7 +6,7 @@ class AlertScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: const Center(
+      body: Center(
           child: ElevatedButton(
               // style: ElevatedButton.styleFrom(
               //   primary: Colors.indigo,
@@ -14,8 +14,8 @@ class AlertScreen extends StatelessWidget {
               // elevation:0
               // ),
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                child: Text('Mostrar Alerta', style: TextStyle(fontSize: 16)),
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                child: const Text('Mostrar Alerta', style: TextStyle(fontSize: 16)),
               ),
               //onPressed: null deshabilita el; boton
               onPressed: () {
