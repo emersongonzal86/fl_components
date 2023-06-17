@@ -13,13 +13,29 @@ class InputScreen extends StatelessWidget {
         ),
         body: const SingleChildScrollView(
           child: Padding(
-              padding:  EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Column(
                 children: [
-                   CustomInputField( labelText: 'Nombre', hintText: 'Nombre del Usuario', )
+                  CustomInputField(
+                      labelText: 'Nombre', hintText: 'Nombre del Usuario'),
+                  SizedBox(height: 30),
+                  CustomInputField(
+                      labelText: 'Apellido', hintText: 'Apellido del Usuario'),
+                  SizedBox(height: 30),
+                  CustomInputField(
+                    labelText: 'Correo',
+                    hintText: 'Correo del Usuario',
+                    keyboardType: TextInputType.emailAddress,
+                  ),
+                  SizedBox(height: 30),
+                  CustomInputField(
+                    labelText: 'Contraseña',
+                    hintText: 'Contraseña del Usuario',
+                    obscureText: true,
+                  ),
+                  SizedBox(height: 30)
                 ],
               )),
         ));
   }
 }
-

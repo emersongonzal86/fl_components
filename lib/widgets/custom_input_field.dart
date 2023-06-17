@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
 
 class CustomInputField extends StatelessWidget {
-
   final String? hintText;
   final String? labelText;
   final String? helperText;
   final IconData? icon;
   final IconData? suffixIcon;
-
+  final TextInputType? keyboardType;
+  final bool obscureText;
 
   const CustomInputField({
-    super.key, this.hintText, this.labelText, this.helperText, this.icon, this.suffixIcon,
+    super.key,
+    this.hintText,
+    this.labelText,
+    this.helperText,
+    this.icon,
+    this.suffixIcon,
+    this.keyboardType,
+    this.obscureText = false,
   });
 
   @override
@@ -19,6 +26,8 @@ class CustomInputField extends StatelessWidget {
       autofocus: false,
       initialValue: '',
       textCapitalization: TextCapitalization.words,
+      keyboardType: keyboardType,
+      obscureText: obscureText,
       onChanged: (value) {
         print('value: $value');
       },
@@ -28,14 +37,13 @@ class CustomInputField extends StatelessWidget {
       },
       autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: InputDecoration(
-          hintText: hintText,
-          labelText: labelText,
-          helperText: helperText,
-          // prefixIcon: Icon( Icons.verified_user_outlined),
-          suffixIcon: suffixIcon == null ? null : Icon( suffixIcon ),
-          icon: icon == null ? null : Icon( icon ),
-          
-          ),
+        hintText: hintText,
+        labelText: labelText,
+        helperText: helperText,
+        // prefixIcon: Icon( Icons.verified_user_outlined),
+        suffixIcon: suffixIcon == null ? null : Icon(suffixIcon),
+        icon: icon == null ? null : Icon(icon),
+      ),
     );
   }
 }
