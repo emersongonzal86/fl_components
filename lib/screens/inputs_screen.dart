@@ -29,23 +29,23 @@ class InputScreen extends StatelessWidget {
                 key: myFormKey,
                 child: Column(
                   children: [
-                    const CustomInputField(
-                        labelText: 'Nombre', hintText: 'Nombre del Usuario'),
+                    CustomInputField(
+                        labelText: 'Nombre', hintText: 'Nombre del Usuario', formProperty: 'first_name', formValues: formValues),
                     const SizedBox(height: 30),
-                    const CustomInputField(
+                    CustomInputField(
                         labelText: 'Apellido',
-                        hintText: 'Apellido del Usuario'),
+                        hintText: 'Apellido del Usuario', formProperty: 'last_name', formValues: formValues),
                     const SizedBox(height: 30),
-                    const CustomInputField(
+                    CustomInputField(
                       labelText: 'Correo',
                       hintText: 'Correo del Usuario',
-                      keyboardType: TextInputType.emailAddress,
+                      keyboardType: TextInputType.emailAddress, formProperty: 'email', formValues: formValues
                     ),
                     const SizedBox(height: 30),
-                    const CustomInputField(
+                    CustomInputField(
                       labelText: 'Contraseña',
                       hintText: 'Contraseña del Usuario',
-                      obscureText: true,
+                      obscureText: true, formProperty: 'password', formValues: formValues
                     ),
                     const SizedBox(height: 30),
                     ElevatedButton(
@@ -55,7 +55,8 @@ class InputScreen extends StatelessWidget {
                           ),
                       onPressed: () {
                         if ( !myFormKey.currentState!.validate() ){
-
+                      
+                      //codigo para ocultar el teclado al tocar el boton
                             FocusScope.of(context).requestFocus( FocusNode());
 
                           print('Formulario no válido');
