@@ -47,6 +47,24 @@ class _ListViewBuilderScreenState extends State<ListViewBuilderScreen> {
 
     isLoading = false;
     setState(() {});
+
+    //para evitar que la pantalla salta cuando esta arriba al disparar el evento animatedTo se usa este codigo
+    //el cual evaluau si la posicion actual mas 100 pixeles no esta cerca de la extension maxima de la pantalla no hace nada
+    //pero si esta cerca al final hace la animacion
+    if( scrollController.position.pixels + 100 <= scrollController.position.maxScrollExtent) return;
+
+//vamos amover la pantalla un poco para arriba para indicar que hay mas imagenes recien cargadas
+
+    scrollController.animateTo(
+      //el offset es la pocicion a donde debo moverme para eso voy a tomar la posicion actual y le sumo los pixles
+      //a los que me quiero desplazar
+
+
+      scrollController.position.pixels + 120, 
+      duration: const Duration( milliseconds: 300), 
+      curve: Curves.fastOutSlowIn)
+
+
   }
 
 // este codigo agrega 5 elementos mas cuando se esta llegando al final del scroll
@@ -94,13 +112,16 @@ class _ListViewBuilderScreenState extends State<ListViewBuilderScreen> {
               },
             ),
             //widget para colocar un widget en una pisicion especifica
-            Positioned(
-                bottom: 40,
 
-                //vamos a tomar el ancho del dispositivo y tomamos la mitad mas el ancho del widget si no le resto los 30
-                //no queda centrado la posicion unicial del widget arrancaria en el centro
-                left: size.width * 0.5 - 30,
-                child: const _LoadingIcon())
+            //vamos a mostrar el loading de manera condicional el if permite una instruccion inclusive permite el else pero sin llaves {}
+            if (isLoading)
+              Positioned(
+                  bottom: 40,
+
+                  //vamos a tomar el ancho del dispositivo y tomamos la mitad mas el ancho del widget si no le resto los 30
+                  //no queda centrado la posicion unicial del widget arrancaria en el centro
+                  left: size.width * 0.5 - 30,
+                  child: const _LoadingIcon())
           ],
         ),
       ),
