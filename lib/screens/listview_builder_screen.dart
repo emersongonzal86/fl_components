@@ -51,20 +51,18 @@ class _ListViewBuilderScreenState extends State<ListViewBuilderScreen> {
     //para evitar que la pantalla salta cuando esta arriba al disparar el evento animatedTo se usa este codigo
     //el cual evaluau si la posicion actual mas 100 pixeles no esta cerca de la extension maxima de la pantalla no hace nada
     //pero si esta cerca al final hace la animacion
-    if( scrollController.position.pixels + 100 <= scrollController.position.maxScrollExtent) return;
+    if (scrollController.position.pixels + 100 <=
+        scrollController.position.maxScrollExtent) return;
 
 //vamos amover la pantalla un poco para arriba para indicar que hay mas imagenes recien cargadas
 
     scrollController.animateTo(
-      //el offset es la pocicion a donde debo moverme para eso voy a tomar la posicion actual y le sumo los pixles
-      //a los que me quiero desplazar
+        //el offset es la pocicion a donde debo moverme para eso voy a tomar la posicion actual y le sumo los pixles
+        //a los que me quiero desplazar
 
-
-      scrollController.position.pixels + 120, 
-      duration: const Duration( milliseconds: 300), 
-      curve: Curves.fastOutSlowIn)
-
-
+        scrollController.position.pixels + 120,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.fastOutSlowIn);
   }
 
 // este codigo agrega 5 elementos mas cuando se esta llegando al final del scroll
@@ -74,6 +72,15 @@ class _ListViewBuilderScreenState extends State<ListViewBuilderScreen> {
     //una vez se agregan los 5 elementos debo hacer setstate para actualizar   el listview y se redibuje
     //solo redibuja la actualizacion
     setState(() {});
+  }
+//creamos un metodo onRefresh para hacer el pull refresh con RefreshIndicator
+
+  Future<void> onRefresh() async {
+    await Future.delayed(const Duration(seconds: 2));
+    final lastId = imagesIds.last;
+    imagesIds.clear();
+    imagesIds.add(lastId + 1);
+    add5();
   }
 
   @override
@@ -93,23 +100,29 @@ class _ListViewBuilderScreenState extends State<ListViewBuilderScreen> {
         removeBottom: true,
         child: Stack(
           children: [
-            ListView.builder(
-              //el siguiente codigo es para que al final se vea igual en ios y android para que pueda subir mas el scroll
-              //para que no aparezca la curvatura que suele aparecer en android
-              physics: const BouncingScrollPhysics(),
-              //vamos a usar un controlador para sabre que tan cerca del final del scroll esta posicionado en este momento
-//cualquier widget que tenga scroll tiene disponible el controlador
-              controller: scrollController,
-              itemCount: imagesIds.length,
-              itemBuilder: (BuildContext context, index) {
-                return FadeInImage(
-                    width: double.infinity,
-                    height: 300,
-                    fit: BoxFit.cover,
-                    placeholder: const AssetImage('assets/jar-loading.gif'),
-                    image: NetworkImage(
-                        'https://picsum.photos/500/300?image=${imagesIds[index]}'));
-              },
+//vamos a usar un widget para hacer el pull to refresh RefreshIndicator envolviendo el widget que tiene el scroll
+
+            RefreshIndicator.adaptive(
+              color: AppTheme.primary,
+              onRefresh: onRefresh,
+              child: ListView.builder(
+                //el siguiente codigo es para que al final se vea igual en ios y android para que pueda subir mas el scroll
+                //para que no aparezca la curvatura que suele aparecer en android
+                physics: const BouncingScrollPhysics(),
+                //vamos a usar un controlador para sabre que tan cerca del final del scroll esta posicionado en este momento
+                //cualquier widget que tenga scroll tiene disponible el controlador
+                controller: scrollController,
+                itemCount: imagesIds.length,
+                itemBuilder: (BuildContext context, index) {
+                  return FadeInImage(
+                      width: double.infinity,
+                      height: 300,
+                      fit: BoxFit.cover,
+                      placeholder: const AssetImage('assets/jar-loading.gif'),
+                      image: NetworkImage(
+                          'https://picsum.photos/500/300?image=${imagesIds[index]}'));
+                },
+              ),
             ),
             //widget para colocar un widget en una pisicion especifica
 
